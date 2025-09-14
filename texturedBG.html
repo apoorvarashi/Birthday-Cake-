@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Platform - How It Works</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, 
+                rgba(173, 216, 230, 0.7) 0%, 
+                rgba(176, 224, 230, 0.8) 25%, 
+                rgba(135, 206, 250, 0.9) 50%, 
+                rgba(173, 216, 230, 0.8) 75%, 
+                rgba(176, 224, 230, 0.7) 100%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23a0d2ff" opacity="0.3"/><path d="M0 0L100 100" stroke="%2367aae4" stroke-width="1" opacity="0.3"/><path d="M100 0L0 100" stroke="%2367aae4" stroke-width="1" opacity="0.3"/></svg>');
+            background-attachment: fixed;
+            color: #2c3e50;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1e88e5, #1565c0);
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e3e3e3;
+        }
+        
+        .tab {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #5a5a5a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            color: #1565c0;
+            border-bottom: 3px solid #1565c0;
+            background: rgba(21, 101, 192, 0.05);
+        }
+        
+        .tab:hover {
+            background: rgba(21, 101, 192, 0.1);
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1565c0;
+            font-size: 1.8rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #5a5a5a;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-number {
+            background: #1565c0;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            color: #1565c0;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .step-content p {
+            color: #5a5a5a;
+            line-height: 1.6;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ddd, transparent);
+            margin: 40px 0;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .feature {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 20px;
+            background: rgba(21, 101, 192, 0.1);
+            border-radius: 10px;
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+        
+        .feature h3 {
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+        
+        .feature p {
+            color: #5a5a5a;
+        }
+        
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .benefit {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .benefit h3 {
+            color: #1565c0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .benefit i {
+            color: #1565c0;
+        }
+        
+        .benefit ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+        
+        .benefit li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .benefit li:before {
+            content: "✓";
+            color: #1565c0;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin: 0 auto;
+            }
+            
+            .features, .benefits {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>How It Works</h1>
+            <p>A simple guide to getting started with our rental platform</p>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="renter">For Renters</div>
+            <div class="tab" data-tab="host">For Hosts</div>
+        </div>
+        
+        <div class="content">
+            <!-- Renter Content -->
+            <div class="tab-content active" id="renter-content">
+                <h2 class="section-title">Finding Your Perfect Rental Home</h2>
+                <p class="section-subtitle">Follow these simple steps to find and secure your ideal rental property</p>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Create Your Account</h3>
+                            <p>Sign up and complete your profile with verification to build trust with hosts.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Search & Filter</h3>
+                            <p>Use our advanced filters to find properties that match your criteria - location, price, amenities, and more.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Tour Virtually or In-Person</h3>
+                            <p>Schedule a viewing through our platform. Many properties offer virtual tours.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Submit Your Application</h3>
+                            <p>Once you've found the perfect place, submit your rental application through our secure platform.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Sign Lease & Move In</h3>
+                            <p>Review and sign your lease digitally, pay your security deposit, and prepare for move-in!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <h2 class="section-title">Benefits for Renters</h2>
+                
+                <div class="benefits">
+                    <div class="benefit">
+                        <h3><i class="fas fa-search"></i> Easy Search</h3>
+                        <ul>
+                            <li>Advanced filters to find exactly what you need</li>
+                            <li>Save your favorite properties</li>
+                            <li>Get alerts for new listings</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="benefit">
+                        <h3><i class="fas fa-shield-alt"></i> Safe Process</h3>
+                        <ul>
+                            <li>Verified property listings</li>
+                            <li>Secure payment processing</li>
+                            <li>Identity verification for all users</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Host Content -->
+            <div class="tab-content" id="host-content">
+                <h2 class="section-title">Renting Out Your Property</h2>
+                <p class="section-subtitle">Follow these simple steps to list and manage your rental property</p>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Create Your Host Account</h3>
+                            <p>Sign up as a host and complete your profile verification to build trust with potential renters.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>List Your Property</h3>
+                            <p>Create a detailed listing with photos, description, amenities, and pricing information.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Manage Inquiries & Applications</h3>
+                            <p>Respond to inquiries, schedule viewings, and review rental applications through our platform.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Screen Tenants & Sign Lease</h3>
+                            <p>Use our screening tools to verify tenant credentials and sign leases digitally.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Receive Payments & Manage Your Rental</h3>
+                            <p>Get paid securely through our platform and use our tools to manage maintenance requests and communications.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <h2 class="section-title">Benefits for Hosts</h2>
+                
+                <div class="benefits">
+                    <div class="benefit">
+                        <h3><i class="fas fa-home"></i> Property Management</h3>
+                        <ul>
+                            <li>Easy-to-use listing dashboard</li>
+                            <li>Calendar for availability management</li>
+                            <li>Automated booking system</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="benefit">
+                        <h3><i class="fas fa-money-bill-wave"></i> Financial Tools</h3>
+                        <ul>
+                            <li>Secure payment processing</li>
+                            <li>Automated rent collection</li>
+                            <li>Financial reporting tools</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="benefit">
+                        <h3><i class="fas fa-user-check"></i> Tenant Screening</h3>
+                        <ul>
+                            <li>Comprehensive background checks</li>
+                            <li>Credit history reports</li>
+                            <li>Previous landlord references</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-lock"></i>
+                    <h3>Secure Platform</h3>
+                    <p>All your data and transactions are protected with bank-level security</p>
+                </div>
+                
+                <div class="feature">
+                    <i class="fas fa-comments"></i>
+                    <h3>Direct Communication</h3>
+                    <p>Message hosts or renters directly through our secure platform</p>
+                </div>
+                
+                <div class="feature">
+                    <i class="fas fa-award"></i>
+                    <h3>Verified Users</h3>
+                    <p>All users undergo verification for a trusted community</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show active content
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${tabId}-content`) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

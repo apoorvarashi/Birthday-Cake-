@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Platform - How It Works</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the tab functionality */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tab-button.active {
+            border-bottom-color: #3b82f6;
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+                    How It Works
+                </h1>
+                <p class="mt-5 max-w-xl mx-auto text-xl text-gray-500">
+                    A simple guide to getting started with our rental platform
+                </p>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="flex justify-center mb-12">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex space-x-8">
+                        <button
+                            id="renter-tab"
+                            class="tab-button whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm border-blue-500 text-blue-600 active"
+                        >
+                            For Renters
+                        </button>
+                        <button
+                            id="host-tab"
+                            class="tab-button whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                        >
+                            For Hosts
+                        </button>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Renter Guide -->
+            <div id="renter-content" class="tab-content active">
+                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                    <div class="px-4 py-5 sm:px-6">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                            Finding Your Perfect Rental Home
+                        </h3>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                            Follow these simple steps to find and secure your ideal rental property
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-200">
+                        <dl>
+                            <!-- Step 1 -->
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Step 1</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <h4 class="font-semibold">Create Your Account</h4>
+                                    <p class="mt-2">Sign up and complete your profile with verification to build trust with hosts.</p>
+                                </dd>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Step 2</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <h4 class="font-semibold">Search & Filter</h4>
+                                    <p class="mt-2">Use our advanced filters to find properties that match your criteria - location, price, amenities, and more.</p>
+                                </dd>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Step 3</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <h4 class="font-semibold">Tour Virtually or In-Person</h4>
+                                    <p class="mt-2">Schedule a viewing through our platform. Many properties offer virtual tours.</p>
+                                </dd>
+                            </div>
+                            <!-- Step 4 -->
+                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Step 4</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <h4 class="font-semibold">Submit Your Application</h4>
+                                    <p class="mt-2">Once you've found the perfect place, submit your rental application through our secure platform.</p>
+                                </dd>
+                            </div>
+                            <!-- Step 5 -->
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Step 5</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <h4 class="font-semibold">Sign Lease & Move In</h4>
+                                    <p class="mt-2">Review and sign your lease digitally, pay your security deposit, and prepare for move-in!</p>
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Host Guide -->
+            <div id="host-content" class="tab-content">
+                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                    <div class="px-4 py-5 sm:px-6">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                            Renting Out Your Property
+                        </h3>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                            Follow these simple steps to list and manage your rental property
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-200">
+                        <dl>
+                            <!-- Step 1 -->
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Step 1</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <h4 class="font-semibold">Create Your Host Account</h4>
+                                    <p class="mt-2">Sign up as a host and complete your profile verification to build trust with potential renters.</p>
+                                </dd>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Step 2</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <h4 class="font-semibold">List Your Property</h4>
+                                    <p class="mt-2">Create a detailed listing with photos, description, amenities, and pricing information.</p>
+                                </dd>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Step 3</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <h4 class="font-semibold">Manage inquiries & Applications</h4>
+                                    <p class="mt-2">Respond to inquiries, schedule viewings, and review rental applications through our platform.</p>
+                                </dd>
+                            </div>
+                            <!-- Step 4 -->
+                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Step 4</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <h4 class="font-semibold">Screen Tenants & Sign Lease</h4>
+                                    <p class="mt-2">Use our screening tools to verify tenant credentials and sign leases digitally.</p>
+                                </dd>
+                            </div>
+                            <!-- Step 5 -->
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Step 5</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <h4 class="font-semibold">Receive Payments & Manage Your Rental</h4>
+                                    <p class="mt-2">Get paid securely through our platform and use our tools to manage maintenance requests and communications.</p>
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="mt-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">Frequently Asked Questions</h2>
+                <div class="space-y-4">
+                    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">How do I verify my account?</h3>
+                            <div class="mt-2 max-w-xl text-sm text-gray-500">
+                                <p>Account verification requires a valid government ID and sometimes a proof of address. This helps ensure safety for all users.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">What documents do I need to rent a property?</h3>
+                            <div class="mt-2 max-w-xl text-sm text-gray-500">
+                                <p>Typically, you'll need proof of income, identification, and rental history. Specific requirements vary by property.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">How are payments processed?</h3>
+                            <div class="mt-2 max-w-xl text-sm text-gray-500">
+                                <p>All payments are processed securely through our platform. We never share your financial information with other parties.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="mt-16 text-center">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Ready to get started?
+                </h2>
+                <p class="mt-4 text-lg leading-6 text-gray-500">
+                    Join thousands of happy renters and hosts on our platform
+                </p>
+                <div class="mt-6 flex justify-center">
+                    <div class="inline-flex rounded-md shadow">
+                        <a
+                            href="#"
+                            class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                        >
+                            Get Started
+                        </a>
+                    </div>
+                    <div class="ml-3 inline-flex">
+                        <a
+                            href="#"
+                            class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200"
+                        >
+                            Contact Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const renterTab = document.getElementById('renter-tab');
+            const hostTab = document.getElementById('host-tab');
+            const renterContent = document.getElementById('renter-content');
+            const hostContent = document.getElementById('host-content');
+            
+            // Function to switch tabs
+            function switchTab(tab) {
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active', 'border-blue-500', 'text-blue-600');
+                    btn.classList.add('border-transparent', 'text-gray-500');
+                });
+                
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab and corresponding content
+                if (tab === 'renter') {
+                    renterTab.classList.add('active', 'border-blue-500', 'text-blue-600');
+                    renterTab.classList.remove('border-transparent', 'text-gray-500');
+                    renterContent.classList.add('active');
+                } else {
+                    hostTab.classList.add('active', 'border-blue-500', 'text-blue-600');
+                    hostTab.classList.remove('border-transparent', 'text-gray-500');
+                    hostContent.classList.add('active');
+                }
+            }
+            
+            // Add event listeners to tabs
+            renterTab.addEventListener('click', () => switchTab('renter'));
+            hostTab.addEventListener('click', () => switchTab('host'));
+        });
+    </script>
+</body>
+</html>
