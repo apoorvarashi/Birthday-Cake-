@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday </title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Dancing Script', cursive;
+            overflow: hidden;
+            background-color: #f8c8dc; /* Baby pink background */
+        }
+        
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .cake-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        
+        .cake-layer {
+            position: absolute;
+            border-radius: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: appear 0.8s forwards;
+        }
+        
+        .layer-1 {
+            width: 240px;
+            height: 60px;
+            background: linear-gradient(to right, #ff5252, #ff867f);
+            bottom: 0;
+            animation-delay: 1.5s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .layer-2 {
+            width: 200px;
+            height: 60px;
+            background: linear-gradient(to right, #f48fb1, #ffc1e3);
+            bottom: 60px;
+            animation-delay: 2.5s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .layer-3 {
+            width: 160px;
+            height: 60px;
+            background: linear-gradient(to right, #7e57c2, #b085f5);
+            bottom: 120px;
+            animation-delay: 3.5s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .candle {
+            position: absolute;
+            width: 16px;
+            height: 60px;
+            background: linear-gradient(to right, #f5f5f5, #e0e0e0);
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: appear 0.8s forwards;
+            animation-delay: 4.5s;
+            z-index: 10;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        }
+        
+        .flame {
+            position: absolute;
+            width: 20px;
+            height: 40px;
+            background: radial-gradient(ellipse at center, #ffeb3b 0%, #ff9800 70%, #ff5722 100%);
+            border-radius: 50% 50% 20% 20%;
+            bottom: 240px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: appear 0.8s forwards, flicker 0.5s infinite alternate;
+            animation-delay: 5s;
+            z-index: 11;
+            box-shadow: 0 0 20px #ff9800, 0 0 40px #ffeb3b55;
+            cursor: pointer;
+        }
+        
+        .message {
+            font-size: 3.2rem;
+            color: #d81b60;
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: message-appear 1.5s forwards;
+            animation-delay: 0.5s;
+            width: auto;
+            padding: 10px;
+            font-weight: bold;
+        }
+        
+        .instructions {
+            color: #e91e63;
+            text-align: center;
+            opacity: 0.8;
+            font-size: 1.2rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-family: Arial, sans-serif;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 30;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: float 6s ease-in forwards;
+            color: #ff4081;
+        }
+        
+        /* Candy decorations */
+        .candy {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: appear 0.8s forwards;
+            z-index: 5;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .candy-1 {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #ff5252, #ffeb3b);
+            bottom: 20px;
+            left: 40%;
+            animation-delay: 2s;
+        }
+        
+        .candy-2 {
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(45deg, #4caf50, #b2ff59);
+            bottom: 25px;
+            left: 60%;
+            animation-delay: 2.2s;
+        }
+        
+        .candy-3 {
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(45deg, #9c27b0, #e1bee7);
+            bottom: 80px;
+            left: 35%;
+            animation-delay: 2.4s;
+        }
+        
+        .candy-4 {
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(45deg, #2196f3, #82b1ff);
+            bottom: 85px;
+            left: 65%;
+            animation-delay: 2.6s;
+        }
+        
+        .candy-5 {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(45deg, #ff9800, #ffcc80);
+            bottom: 140px;
+            left: 45%;
+            animation-delay: 2.8s;
+        }
+        
+        .candy-6 {
+            width: 19px;
+            height: 19px;
+            background: linear-gradient(45deg, #f44336, #ffcdd2);
+            bottom: 145px;
+            left: 55%;
+            animation-delay: 3s;
+        }
+        
+        /* Sprinkles */
+        .sprinkle {
+            position: absolute;
+            width: 5px;
+            height: 15px;
+            border-radius: 2px;
+            opacity: 0;
+            animation: appear 0.8s forwards;
+            z-index: 4;
+        }
+        
+        .sprinkle-1 {
+            background-color: #ff5252;
+            bottom: 15px;
+            left: 30%;
+            transform: rotate(30deg);
+            animation-delay: 3.2s;
+        }
+        
+        .sprinkle-2 {
+            background-color: #ffeb3b;
+            bottom: 18px;
+            left: 70%;
+            transform: rotate(-20deg);
+            animation-delay: 3.3s;
+        }
+        
+        .sprinkle-3 {
+            background-color: #4caf50;
+            bottom: 75px;
+            left: 25%;
+            transform: rotate(10deg);
+            animation-delay: 3.4s;
+        }
+        
+        .sprinkle-4 {
+            background-color: #2196f3;
+            bottom: 78px;
+            left: 75%;
+            transform: rotate(-15deg);
+            animation-delay: 3.5s;
+        }
+        
+        .sprinkle-5 {
+            background-color: #9c27b0;
+            bottom: 135px;
+            left: 30%;
+            transform: rotate(25deg);
+            animation-delay: 3.6s;
+        }
+        
+        .sprinkle-6 {
+            background-color: #ff9800;
+            bottom: 138px;
+            left: 70%;
+            transform: rotate(-30deg);
+            animation-delay: 3.7s;
+        }
+        
+        /* Additional sprinkles */
+        .sprinkle-7 {
+            background-color: #e91e63;
+            bottom: 50px;
+            left: 40%;
+            transform: rotate(15deg);
+            animation-delay: 3.8s;
+        }
+        
+        .sprinkle-8 {
+            background-color: #00bcd4;
+            bottom: 53px;
+            left: 50%;
+            transform: rotate(-25deg);
+            animation-delay: 3.9s;
+        }
+        
+        .sprinkle-9 {
+            background-color: #ffc107;
+            bottom: 110px;
+            left: 40%;
+            transform: rotate(40deg);
+            animation-delay: 4.0s;
+        }
+        
+        .sprinkle-10 {
+            background-color: #8bc34a;
+            bottom: 113px;
+            left: 60%;
+            transform: rotate(-10deg);
+            animation-delay: 4.1s;
+        }
+        
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        
+        @keyframes message-appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes flicker {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                transform: translateX(-50%) scale(1.1) rotate(2deg);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes explode {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(1) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .message {
+                font-size: 2.5rem;
+            }
+            
+            .cake-container {
+                transform: scale(0.8);
+                margin-bottom: 10px;
+            }
+            
+            .instructions {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cake-container">
+            <div class="cake-layer layer-1"></div>
+            <div class="cake-layer layer-2"></div>
+            <div class="cake-layer layer-3"></div>
+            
+            <!-- Candy decorations -->
+            <div class="candy candy-1"></div>
+            <div class="candy candy-2"></div>
+            <div class="candy candy-3"></div>
+            <div class="candy candy-4"></div>
+            <div class="candy candy-5"></div>
+            <div class="candy candy-6"></div>
+            
+            <!-- Sprinkle decorations -->
+            <div class="sprinkle sprinkle-1"></div>
+            <div class="sprinkle sprinkle-2"></div>
+            <div class="sprinkle sprinkle-3"></div>
+            <div class="sprinkle sprinkle-4"></div>
+            <div class="sprinkle sprinkle-5"></div>
+            <div class="sprinkle sprinkle-6"></div>
+            <div class="sprinkle sprinkle-7"></div>
+            <div class="sprinkle sprinkle-8"></div>
+            <div class="sprinkle sprinkle-9"></div>
+            <div class="sprinkle sprinkle-10"></div>
+            
+            <div class="candle"></div>
+            <div class="flame"></div>
+        </div>
+        
+        <div class="message">Happy Birthday ❤️!</div>
+        
+        <div class="instructions">Click on the flame to blow out the candle!</div>
+        
+        <div class="hearts" id="hearts"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const flame = document.querySelector('.flame');
+            const message = document.querySelector('.message');
+            const heartsContainer = document.getElementById('hearts');
+            
+            // Make the flame interactive
+            flame.addEventListener('click', function() {
+                blowOutCandle();
+            });
+            
+            // For mobile touch support
+            flame.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                blowOutCandle();
+            });
+            
+            // Create floating hearts
+            function createHearts() {
+                setInterval(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                    heartsContainer.appendChild(heart);
+                    
+                    // Remove heart after animation
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 10000);
+                }, 300);
+            }
+            
+            function blowOutCandle() {
+                flame.style.animation = 'none';
+                flame.style.transition = 'all 0.5s ease-out';
+                flame.style.transform = 'translateX(-50%) scale(0)';
+                flame.style.opacity = '0';
+                
+                // Add smoke effect
+                const smoke = document.createElement('div');
+                smoke.style.position = 'absolute';
+                smoke.style.width = '20px';
+                smoke.style.height = '40px';
+                smoke.style.background = 'radial-gradient(ellipse at center, rgba(200,200,200,0.8) 0%, rgba(100,100,100,0.4) 70%, transparent 100%)';
+                smoke.style.borderRadius = '50%';
+                smoke.style.bottom = '240px';
+                smoke.style.left = '50%';
+                smoke.style.transform = 'translateX(-50%)';
+                smoke.style.zIndex = '12';
+                document.querySelector('.cake-container').appendChild(smoke);
+                
+                // Animate smoke
+                setTimeout(() => {
+                    smoke.style.transition = 'all 2s ease-out';
+                    smoke.style.transform = 'translateX(-50%) translateY(-60px) scale(2)';
+                    smoke.style.opacity = '0';
+                }, 50);
+                
+                // Remove smoke after animation
+                setTimeout(() => {
+                    smoke.remove();
+                }, 2000);
+                
+                // Create celebration effect
+                message.style.textShadow = '0 0 20px #ff4081, 0 0 30px #ff4081';
+                message.style.transition = 'all 0.5s ease';
+                
+                // Create explosion of hearts distributed all over the screen
+                for (let i = 0; i < 50; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.classList.add('heart');
+                        heart.innerHTML = '❤️';
+                        
+                        // Random positions all over the screen
+                        const tx = (Math.random() * 200 - 100) + 'vw';
+                        const ty = (Math.random() * 200 - 100) + 'vh';
+                        
+                        // Custom animation for explosion effect
+                        heart.style.cssText = `
+                            left: 50%;
+                            top: 50%;
+                            --tx: ${tx};
+                            --ty: ${ty};
+                            animation: explode 2s ease-out forwards;
+                            font-size: ${Math.random() * 25 + 15}px;
+                            color: hsl(${Math.random() * 360}, 100%, 65%);
+                        `;
+                        
+                        heartsContainer.appendChild(heart);
+                        
+                        // Remove heart after animation
+                        setTimeout(() => {
+                            heart.remove();
+                        }, 2000);
+                    }, i * 50);
+                }
+            }
+            
+            // Start creating floating hearts
+            createHearts();
+        });
+    </script>
+</body>
+</html>
